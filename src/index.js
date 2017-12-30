@@ -5,11 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const render = Component => {
-    ReactDOM.render(
+    ReactDOM.hydrate(
         <AppContainer>
             <Component />
         </AppContainer>,
-        document.getElementById('root')
+        document.getElementById('react-view')
     );
 };
 
@@ -18,6 +18,7 @@ render(App);
 // Webpack Hot Module Replacement API
 if (module.hot) {
     module.hot.accept('./App', () => {
-        render(App);
+        const NextApp = require('./App').default;
+        render(NextApp);
     });
 }
