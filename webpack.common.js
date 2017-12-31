@@ -1,4 +1,3 @@
-const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
@@ -10,7 +9,7 @@ const jsName = process.env.NODE_ENV === 'production' ? 'bundle-[hash].js' : 'bun
 module.exports = {
     entry: ['react-hot-loader/patch', './src/index.js'],
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['static/build']),
         new ExtractTextPlugin(cssName),
         new webpack.NamedModulesPlugin()
     ],
@@ -25,11 +24,6 @@ module.exports = {
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader']
                 }))
-            },
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loaders: ['babel-loader', 'eslint-loader']
             }
         ]
     },

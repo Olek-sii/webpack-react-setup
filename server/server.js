@@ -1,5 +1,4 @@
 import App from '../src/App';
-import { AppContainer } from 'react-hot-loader';
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -7,11 +6,7 @@ import ReactDOM from 'react-dom/server';
 const app = express();
 
 app.use((req, res) => {
-    const componentHTML = ReactDOM.renderToString(
-        <AppContainer>
-            <App />
-        </AppContainer>
-    );
+    const componentHTML = ReactDOM.renderToString(<App />);
     res.end(renderHTML(componentHTML));
 });
 
