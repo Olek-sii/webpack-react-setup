@@ -1,21 +1,18 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
+
+const publicPath = 'http://localhost:8050/static/build/';
+const cssName = process.env.NODE_ENV === 'production' ? 'styles-[hash].css' : 'styles.css';
+const jsName = process.env.NODE_ENV === 'production' ? 'bundle-[hash].js' : 'bundle.js';
 
 module.exports = {
     entry: ['react-hot-loader/patch', './src/index.js'],
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            title: 'My webpack setup',
-            template: 'template.html'
-        }),
-        new ExtractTextPlugin('styles.css'),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common'
-        })
+        new ExtractTextPlugin(cssName),
+        new webpack.NamedModulesPlugin()
     ],
     resolve: {
         extensions: ['.js', '.jsx']
@@ -37,7 +34,8 @@ module.exports = {
         ]
     },
     output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: jsName,
+        path: `${__dirname}/static/build/`,
+        publicPath
     }
 };
