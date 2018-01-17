@@ -11,7 +11,7 @@ module.exports = merge(common, {
         rules: [
             {
                 test: /\.jsx?$/,
-                loaders: ['react-hot-loader/webpack', 'babel-loader', 'eslint-loader'],
+                loaders: ['babel-loader', 'eslint-loader'],
                 exclude: [/node_modules/, /public/]
             }
         ]
